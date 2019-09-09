@@ -1,0 +1,36 @@
+{
+  "name": "grawth",
+  "version": "1.0.0",
+  "description": "Graphql Auth with jwt",
+  "author": "Nasir Khan",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+    "esm": "cross-env NODE_ENV=development nodemon -r esm server/index.js --watch server apollo/tools",
+    "build": "nuxt build",
+    "start": "cross-env NODE_ENV=production node server/index.js",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/apollo": "^4.0.0-rc12",
+    "@nuxtjs/axios": "^5.3.6",
+    "apollo-server": "2.6.4",
+    "apollo-server-express": "2.6.4",
+    "body-parser": "^1.19.0",
+    "cross-env": "^5.2.0",
+    "esm": "^3.2.25",
+    "express": "^4.16.4",
+    "express-graphql": "^0.9.0",
+    "graphql": "^14.5.4",
+    "graphql-subscriptions": "^1.1.0",
+    "graphql-tag": "^2.10.1",
+    "graphql-tools": "^4.0.5",
+    "node-sass": "^4.12.0",
+    "nuxt": "^2.0.0",
+    "sass-loader": "^8.0.0",
+    "subscriptions-transport-ws": "^0.9.16"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}

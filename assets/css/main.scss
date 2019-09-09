@@ -1,0 +1,12 @@
+:root {
+  --body-color: rgba(231, 228, 228, 0.226);
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  background: var(--body-color);
+}
