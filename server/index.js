@@ -1,23 +1,25 @@
-const express = require('express')
+const express = require('express');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const apollo = require('../apollo/graphql/server.js');
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
+
 const app = express()
 
-// ------- Graphql
-// const bodyParser = require('body-parser');
-const { ApolloServer, gql } = require('apollo-server-express');
-// const { createServer } = require('http');
-// const { execute, subscribe } = require('graphql');
-// const { PubSub } = require('graphql-subscriptions');
-const { SubscriptionServer } = require('subscriptions-transport-ws');
-const schema = require('../apollo/tools/schema');
-const resolvers = require('../apollo/tools/resolvers');
+app.use(bodyParser.urlencoded({ extended:  false }));
+app.use(bodyParser.json());
+app.use(cookieParser())
 
-const apollo = new ApolloServer({ typeDefs: schema, resolvers });
 apollo.applyMiddleware({ app })
-// const server = createServer(app)
-// apollo.installSubscriptionHandlers(server)
-// -------
+
+// Prototype user token
+const { createTokens } = require('../apollo/jwt/token')
+app.post('/auth/login', (req, res) => {
+  res.send(createTokens({id: req.body.id}))
+})
+
+// ------
 
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')

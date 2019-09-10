@@ -4,6 +4,17 @@
   </div>
 </template>
 
+<script>
+export default {
+  beforeMount () {
+    const user = this.$cookies.get('auth');
+    if(user && !this.$store.user) {
+      this.$store.commit('SET_USER', user)
+    }
+  },
+}
+</script>
+
 <style>
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',

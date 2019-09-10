@@ -7,6 +7,10 @@
 <script>
 import hello from '../apollo/queries/hello.gql';
 export default {
+  async created () {
+    // const resp = await this.$axios.get('/token')
+    // console.log({resp})
+  },
   apollo: {
     hello: {
       // prefetch: true,

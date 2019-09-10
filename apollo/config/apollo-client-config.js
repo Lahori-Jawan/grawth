@@ -1,22 +1,37 @@
+// https://github.com/nuxt-community/apollo-module/pull/227
+export default function( context ){
+  var headers={};
+  if(typeof context.ssrContext != 'undefined')
+    headers = context.ssrContext.req.headers
 
-export default function(context){
   return {
-    // required
-    httpEndpoint: 'http://localhost:3000/graphql',
-    // optional
-    // See https://www.apollographql.com/docs/link/links/http.html#options
-    httpLinkOptions: {
-      credentials: 'same-origin'
+    apollo:{
+      ssrMode: true,
+      credentials: 'include',
+      fetchOptions:{
+        credentials: 'include',
+      },
     },
-    // You can use `wss` for secure connection (recommended in production)
-    // Use `null` to disable subscriptions
-    // wsEndpoint: 'ws://localhost:3000', // optional
+    httpEndpoint: 'http://localhost:3000/graphql',
+    httpLinkOptions: {
+      credentials: 'include',
+      fetchOptions:{
+        credentials: 'include',
+      },
+      headers: headers // this is either {} if in-browser or the browser's req if SSR
+    },
+    // wsEndpoint: 'your ws or wss endpoint',
+
+    credentials: 'include',
     // LocalStorage token
     tokenName: 'apollo-token', // optional
     // Enable Automatic Query persisting with Apollo Engine
     persisting: false, // Optional
+
     // Use websockets for everything (no HTTP)
     // You need to pass a `wsEndpoint` for this to work
-    websocketsOnly: false // Optional
+    //websocketsOnly: false // Optional
+    // causes: Network error: Only subscriptions are allowed over websocket transport
+    //websocketsOnly: true // Optional
   }
 }
