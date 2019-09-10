@@ -34,8 +34,9 @@ module.exports = {
   /*
   ** Nuxt.js dev-modules
   */
-  buildModules: [
-  ],
+  router: {
+    // middleware: 'no-auth'
+  },
   /*
   ** Nuxt.js modules
   */

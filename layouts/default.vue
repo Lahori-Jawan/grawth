@@ -1,17 +1,27 @@
 <template>
-  <div id="layout" class="default">
+  <div id="page" class="default">
+    <button @click="logout" v-if="$store.state.auth">Logout</button>
     <nuxt />
   </div>
 </template>
 
 <script>
 export default {
-  beforeMount () {
-    const user = this.$cookies.get('auth');
-    if(user && !this.$store.user) {
-      this.$store.commit('SET_USER', user)
+  async beforeMount () {
+    const auth = this.$cookies.get('auth');
+    if(auth && !this.$store.auth) {
+      this.$store.commit('SET_AUTH', auth)
+      await this.$apolloHelpers.onLogin(auth.token)
     }
   },
+  methods: {
+    async logout () {
+      this.$cookies.remove('token')
+      this.$cookies.remove('auth')
+      this.$store.commit('SET_AUTH', null)
+      await this.$apolloHelpers.onLogout()
+    },
+  }
 }
 </script>
 

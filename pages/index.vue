@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <nuxt-link to="/auth/login">Login</nuxt-link>
     I am {{ hello }}
   </div>
 </template>

@@ -9,11 +9,10 @@ const SERVER = new ApolloServer({
   schema: makeExecutableSchema({typeDefs, resolvers}),
   playground: process.env.NODE_ENV !== 'production',
   context: async ({ req }) => {
-    console.log('cookie', req.cookies.auth)
     try {
-      // const token = getToken(req.cookies.auth || req.headers.authorization)
-      // const token = req.headers.authorization || '';
-      const user = verifyToken(req.cookies.auth)
+      const token = req.cookies.token || req.headers.authorization || '';
+      console.log('length', token.length, req.cookies.token, req.headers.authorization)
+      const user = token.length ? verifyToken(token) : null
 
       if (!user)
         throw new Error('No User')
