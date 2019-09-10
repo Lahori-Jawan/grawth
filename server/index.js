@@ -14,7 +14,7 @@ app.use(cookieParser())
 apollo.applyMiddleware({ app })
 
 // Prototype user token
-const { createTokens } = require('../apollo/jwt/token')
+const { createTokens } = require('../apollo/jwt/token');
 app.post('/auth/login', (req, res) => {
   res.send(createTokens({id: req.body.id}))
 })

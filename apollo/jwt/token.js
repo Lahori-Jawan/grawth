@@ -25,6 +25,7 @@ const Token = {
     }
   },
   createTokens(payload, customDuration = '1d', refreshDuration = '7d') {
+    console.log({payload})
     const customToken = jwt.sign(payload, customTokenSecret, {expiresIn: customDuration})
     const refreshToken = jwt.sign(payload, refreshTokenSecret, {expiresIn: refreshDuration})
     return [customToken, refreshToken]
