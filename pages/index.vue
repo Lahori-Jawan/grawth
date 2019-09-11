@@ -8,6 +8,7 @@
 <script>
 import hello from '../apollo/queries/hello.gql';
 export default {
+  middleware: 'auth',
   async created () {
     // const resp = await this.$axios.get('/token')
     // console.log({resp})

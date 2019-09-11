@@ -19,7 +19,8 @@ export default {
       this.$cookies.remove('token')
       this.$cookies.remove('auth')
       this.$store.commit('SET_AUTH', null)
-      await this.$apolloHelpers.onLogout()
+      await this.$apolloHelpers.onLogout();
+      this.$router.push({ path: '/auth/login'})
     },
   }
 }
