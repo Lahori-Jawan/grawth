@@ -1,7 +1,14 @@
 <template>
-  <div class="home">
-    <nuxt-link to="/auth/login">Login</nuxt-link>
+  <div class="home is-flex is-centered">
+    <nuxt-link to="/auth/login" v-if="!$store.state.auth">Login</nuxt-link>
     I am {{ hello }}
+    <div class="content">
+      <ul>
+        <li v-for="user in users" :key="user.id">
+          {{ user.username }}
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -10,10 +17,9 @@ import hello from '../apollo/queries/hello.gql';
 import userCreated from '@/apollo/subscriptions/userCreated.gql'
 export default {
   middleware: 'auth',
-  async created () {
-    // const resp = await this.$axios.get('/token')
-    // console.log({resp})
-  },
+  data: () => ({
+    users: []
+  }),
   apollo: {
     hello: {
       // prefetch: true,
@@ -21,12 +27,13 @@ export default {
     },
     // Subscription
     $subscribe: {
-    // When a tag is added
+    // When a user is created
       userCreated: {
         query: userCreated,
         // Don't forget to destructure `data`
-        result ({ data }) {
-          console.log('subuscription:user-created', data)
+        result ({ data: { userCreated } }) {
+          const {id, username} = userCreated.user
+          this.users.push({id, username})
         },
       },
     },
@@ -35,9 +42,4 @@ export default {
 </script>
 
 <style>
-.home {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 </style>

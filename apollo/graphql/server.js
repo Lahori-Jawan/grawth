@@ -10,6 +10,8 @@ const SERVER = new ApolloServer({
   playground: process.env.NODE_ENV !== 'production',
   context: async ({ req }) => {
 
+    if(!req) return {}
+    console.log('req, path', req.path)
     try {
 
       const token = req.cookies.token || req.headers.authorization || '';

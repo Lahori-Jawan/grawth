@@ -16,13 +16,6 @@ apollo.applyMiddleware({ app })
 
 const httpServer = createServer(app);
 apollo.installSubscriptionHandlers(httpServer)
-// Prototype user token
-const { createTokens } = require('../apollo/jwt/token');
-app.post('/auth/login', (req, res) => {
-  res.send(createTokens({id: req.body.id}))
-})
-
-// ------
 
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')

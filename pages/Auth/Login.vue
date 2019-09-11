@@ -5,6 +5,8 @@
     <button type="submit" @click="login">
       Login
     </button>
+    or
+    <nuxt-link to="/auth/register">Register</nuxt-link>
   </div>
 </template>
 
