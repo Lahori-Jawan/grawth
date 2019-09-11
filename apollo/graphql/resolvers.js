@@ -1,3 +1,4 @@
+const { PubSub, withFilter } = require('apollo-server');
 const { createTokens } = require('../jwt/token');
 // example data
 const me = 'Nasir Khan';
@@ -6,6 +7,10 @@ const users = [
   { id: 2, username: 'lahori-buddha', email: 'buddha@mail.com', password: '123'},
   { id: 3, username: 'lahori-lahori', email: 'lahori@mail.com', password: '123'},
 ]
+// for subscriptions
+const USER_CREATED = 'USER_CREATED';
+// const USER_UPDATED = 'MESSAGE_UPDATED';
+const pubsub = new PubSub();
 
 const resolvers = {
   Query: {
@@ -20,9 +25,11 @@ const resolvers = {
       // const user = await createUser({ ...args, password })
       const index = users.push({id: users.length+1, ...args})
       const user = users[index - 1]
+
       // 3
       const token = createTokens({ userId: user.id })[0]
-      console.log({user, token, args})
+      await pubsub.publish(USER_CREATED, { userCreated: {user, token} });
+      // console.log({user, token, args})
       // 4
       return {
         token,
@@ -53,7 +60,22 @@ const resolvers = {
         user,
       }
     }
+  },
+
+  Subscription: {
+    userCreated: {
+      subscribe: () => pubsub.asyncIterator([USER_CREATED]),
+    },
+    // messageUpdated: {
+    //   subscribe: withFilter(
+    //     () => pubsub.asyncIterator('MESSAGE_UPDATED'),
+    //       (payload, variables) => {
+    //         return payload.messageUpdated.id === variables.id;
+    //       },
+    //     ),
+    // },
   }
+
 };
 
 module.exports = resolvers

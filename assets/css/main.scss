@@ -29,9 +29,33 @@ body {
 .is-flex {
   display: flex;
 }
-.is-center-h {
+
+.is-flex-v {
+  display: flex;
+  flex-direction: column;
+}
+
+.is-centered {
+  justify-content: center;
+  align-items: center;
+}
+
+.is-center {
   justify-content: center;
 }
+
 .is-center-v {
   align-items: center;
+}
+
+.is-space-a {
+  justify-content: space-around;
+}
+
+.is-space-b {
+  justify-content: space-between;
+}
+
+.is-space-e {
+  justify-content: space-evenly;
 }

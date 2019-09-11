@@ -1,5 +1,5 @@
 <template>
-  <div class="login-form is-flex is-center-h is-center-v fullheight">
+  <div class="login-form is-flex is-center is-center-v fullheight">
     <input type="email" v-model="credentials.email" placeholder="email">
     <input type="password" v-model="credentials.password" placeholder="password">
     <button type="submit" @click="login">

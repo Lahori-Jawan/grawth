@@ -9,20 +9,24 @@ const SERVER = new ApolloServer({
   schema: makeExecutableSchema({typeDefs, resolvers}),
   playground: process.env.NODE_ENV !== 'production',
   context: async ({ req }) => {
+
     try {
+
       const token = req.cookies.token || req.headers.authorization || '';
-      console.log('length', token.length, req.cookies.token, req.headers.authorization)
+
       const user = token.length ? verifyToken(token) : null
 
-      if (!user)
-        throw new Error('No User')
+      if (!user) throw new Error('Not Authenticated')
 
       // const user = await getUser(payload.tenant)
 
       return { user }
+
     } catch (err) {
-      console.log(err)
+
+      console.log('token verification catch', err)
       return {}
+
     }
   }
 });

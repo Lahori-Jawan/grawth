@@ -1,6 +1,14 @@
 <template>
   <div id="page" class="default">
     <button @click="logout" v-if="$store.state.auth">Logout</button>
+    <div class="nav is-flex is-space-e">
+      <nuxt-link to="/demo">
+        Public Page
+      </nuxt-link>
+      <nuxt-link to="/">
+        Protected Page
+      </nuxt-link>
+    </div>
     <nuxt />
   </div>
 </template>
@@ -19,7 +27,7 @@ export default {
       this.$cookies.remove('token')
       this.$cookies.remove('auth')
       this.$store.commit('SET_AUTH', null)
-      await this.$apolloHelpers.onLogout();
+      await this.$apolloHelpers.onLogout()
       this.$router.push({ path: '/auth/login'})
     },
   }

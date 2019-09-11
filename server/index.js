@@ -1,3 +1,4 @@
+const { createServer } = require('http')
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -9,10 +10,12 @@ const app = express()
 
 app.use(bodyParser.urlencoded({ extended:  false }));
 app.use(bodyParser.json());
-app.use(cookieParser())
+app.use(cookieParser());  /* JSON.parse(req.cookies).auth -> req.cookies.auth */
 
 apollo.applyMiddleware({ app })
 
+const httpServer = createServer(app);
+apollo.installSubscriptionHandlers(httpServer)
 // Prototype user token
 const { createTokens } = require('../apollo/jwt/token');
 app.post('/auth/login', (req, res) => {
@@ -44,9 +47,10 @@ async function start () {
 
 
   // Listen the server
-  app.listen(port, host)
+  httpServer.listen(port, host)
   consola.ready({
-    message: `Server listening on http://${host}:${port} and graphql path is ${apollo.graphqlPath}`,
+    message: `Server listening on http://${host}:${port} and
+      graphql path for http is ${apollo.graphqlPath} and subscriptions path is ws://${host}:${port}${apollo.subscriptionsPath}`,
     badge: true
   })
 }

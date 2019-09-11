@@ -7,6 +7,7 @@
 
 <script>
 import hello from '../apollo/queries/hello.gql';
+import userCreated from '@/apollo/subscriptions/userCreated.gql'
 export default {
   middleware: 'auth',
   async created () {
@@ -17,7 +18,18 @@ export default {
     hello: {
       // prefetch: true,
       query: hello
-    }
+    },
+    // Subscription
+    $subscribe: {
+    // When a tag is added
+      userCreated: {
+        query: userCreated,
+        // Don't forget to destructure `data`
+        result ({ data }) {
+          console.log('subuscription:user-created', data)
+        },
+      },
+    },
   }
 }
 </script>

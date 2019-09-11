@@ -20,7 +20,7 @@ export default function( context ){
       },
       headers: headers // this is either {} if in-browser or the browser's req if SSR
     },
-    // wsEndpoint: 'your ws or wss endpoint',
+    wsEndpoint: 'ws://localhost:3000/graphql',
 
     credentials: 'include',
     // LocalStorage token
