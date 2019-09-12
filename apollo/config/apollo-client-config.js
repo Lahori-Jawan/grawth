@@ -1,4 +1,7 @@
 // https://github.com/nuxt-community/apollo-module/pull/227
+// const HOST = process.env.HOST, PORT = process.env.PORT
+// let httpEndpoint = HOST:PORT/ENDPOINT || `http://localhost:${PORT}/graphql`;
+//   let wsEndpoint = process.env.WS_ENDPOINT || 'ws://localhost:4000/graphql';
 export default function( context ){
   var headers={};
   if(typeof context.ssrContext != 'undefined')
