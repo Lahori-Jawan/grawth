@@ -1,0 +1,10 @@
+subscription userCreated {
+  userCreated {
+    token
+    user {
+      id
+      username
+      email
+    }
+  }
+}

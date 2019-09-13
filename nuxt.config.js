@@ -29,12 +29,14 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~plugins/vue-cookie.client.js'
   ],
   /*
   ** Nuxt.js dev-modules
   */
-  buildModules: [
-  ],
+  router: {
+    // middleware: 'no-auth'
+  },
   /*
   ** Nuxt.js modules
   */
