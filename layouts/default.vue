@@ -16,6 +16,9 @@
 <script>
 export default {
   async beforeMount () {
+    const token = this.$cookies.get('token');
+    if(!token) return this.logout()
+
     const auth = this.$cookies.get('auth');
     if(auth && !this.$store.auth) {
       this.$store.commit('SET_AUTH', auth)
