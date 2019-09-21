@@ -29,7 +29,6 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~plugins/vue-cookie.client.js'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -45,6 +44,7 @@ module.exports = {
     '@nuxtjs/axios',
     // https://github.com/nuxt-community/apollo-module
     '@nuxtjs/apollo',
+    'cookie-universal-nuxt'
   ],
 
   apollo: {
