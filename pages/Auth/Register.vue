@@ -32,9 +32,9 @@ export default {
         },
         update: (store, { data: { signup } } ) => {
           let token = signup.token
-          // this.$cookies.remove('token')
-          this.$cookies.set('token', token)
-          this.$cookies.set('auth', signup)
+          const options = { path: '/', maxAge: 60 * 60 * 24 * 3 }
+          this.$cookies.set('token', token, options)
+          this.$cookies.set('auth', signup, options)
           this.$store.commit('SET_AUTH', signup)
           this.$router.push({ path: '/'})
         }

@@ -29,8 +29,9 @@ export default {
         },
         update: (store, { data: { login } } ) => {
           let token = login.token
-          this.$cookies.set('token', token)
-          this.$cookies.set('auth', login)
+          const options = { path: '/', maxAge: 60 * 60 * 24 * 3 }
+          this.$cookies.set('token', token, options)
+          this.$cookies.set('auth', login, options)
           this.$store.commit('SET_AUTH', login)
           this.$router.push({ path: '/'})
         }
