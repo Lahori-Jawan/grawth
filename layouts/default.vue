@@ -5,6 +5,7 @@
       <nuxt-link to="/demo">
         Public Page
       </nuxt-link>
+      <!-- <a href="/demo">Public Page</a> -->
       <nuxt-link to="/">
         Protected Page
       </nuxt-link>
